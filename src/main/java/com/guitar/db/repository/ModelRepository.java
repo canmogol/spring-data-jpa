@@ -2,6 +2,10 @@ package com.guitar.db.repository;
 
 import com.guitar.db.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -74,7 +78,7 @@ public class ModelRepository {
     /**
      * Custom finder
      */
-    public List<Model> getModelsByPriceRangeAndWoodType(BigDecimal lowest, BigDecimal highest, String wood) {
+    public Page<Model> getModelsByPriceRangeAndWoodType(BigDecimal lowest, BigDecimal highest, String wood) {
 //        @SuppressWarnings("unchecked")
 //        List<Model> mods = entityManager
 //                .createQuery("select m from Model m where m.price >= :lowest and m.price <= :highest and m.woodType like :wood")
@@ -82,7 +86,13 @@ public class ModelRepository {
 //                .setParameter("highest", highest)
 //                .setParameter("wood", "%" + wood + "%").getResultList();
 //        return mods;
-        return modelJpaRepository.queryByPriceRangeAndWoodType(lowest, highest, "%" + wood + "%");
+
+//        return modelJpaRepository.queryByPriceRangeAndWoodType(lowest, highest, "%" + wood + "%");
+
+        Sort sort = new Sort(Sort.Direction.ASC, "name");
+        Pageable page = new PageRequest(0, 10, sort);
+        Page<Model> models = modelJpaRepository.queryByPriceRangeAndWoodType(lowest, highest, "%" + wood + "%", page);
+        return models;
     }
 
     /**
