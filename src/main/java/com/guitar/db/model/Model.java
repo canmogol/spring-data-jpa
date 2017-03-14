@@ -12,6 +12,10 @@ import java.util.Date;
 @Entity
 @NamedQuery(name = "Model.findAllModelsByType", query = "select m from Model m where m.modelType.name = :name")
 public class Model {
+
+    @Version
+    private int version;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -38,6 +42,14 @@ public class Model {
 
     @LastModifiedDate
     private Date lastModifiedDate;
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 
     public String getCreatedBy() {
         return createdBy;

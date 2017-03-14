@@ -4,10 +4,12 @@ import com.guitar.db.model.Model;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.persistence.LockModeType;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public interface ModelJpaRepository extends JpaRepository<Model, Long>, ModelJpa
             BigDecimal less, BigDecimal greater
     );
 
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     List<Model> findByModelTypeNameIn(List<String> types);
 
     @Query(
