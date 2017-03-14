@@ -16,4 +16,10 @@ public interface ManufacturerJpaRepository extends JpaRepository<Manufacturer, L
 
     Manufacturer findDistinctManifacturerByNameLike(String name);
 
+    // "Manufacturer.getAllThatSellAcoustics" is a native query
+    // "Manufacturer." first part is the generic type of this repository
+    // second part ".getAllThatSellAcoustics" is the native query name
+    // match the name of this method to the native method and it should work
+    List<Manufacturer> getAllThatSellAcoustics(String name);
+
 }
