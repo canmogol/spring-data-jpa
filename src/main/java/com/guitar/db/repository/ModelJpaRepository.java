@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface ModelJpaRepository extends JpaRepository<Model, Long> {
+public interface ModelJpaRepository extends JpaRepository<Model, Long>, ModelJpaRepositoryCustom {
 
     List<Model> findByPriceLessThanEqualAndPriceGreaterThanEqual(
             BigDecimal less, BigDecimal greater
