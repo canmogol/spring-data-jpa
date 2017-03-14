@@ -1,91 +1,133 @@
 package com.guitar.db.model;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-
 @Entity
-@NamedQuery(name="Model.findAllModelsByType", query="select m from Model m where m.modelType.name = :name")
+@NamedQuery(name = "Model.findAllModelsByType", query = "select m from Model m where m.modelType.name = :name")
 public class Model {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String name;
+    private BigDecimal price;
+    private int frets;
+    private String woodType;
+    private Date yearFirstMade;
 
-	private String name;	
-	private BigDecimal price;
-	private int frets;
-	private String woodType;
-	private Date yearFirstMade;
-	
-	@ManyToOne
-	private Manufacturer manufacturer;
+    @ManyToOne
+    private Manufacturer manufacturer;
 
-	@ManyToOne
-	private ModelType modelType;
+    @ManyToOne
+    private ModelType modelType;
 
-	public String getName() {
-		return name;
-	}
+    @CreatedBy
+    private String createdBy;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @CreatedDate
+    private Date createdDate;
 
-	public BigDecimal getPrice() {
-		return price;
-	}
+    @LastModifiedBy
+    private String lastModifiedBy;
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    @LastModifiedDate
+    private Date lastModifiedDate;
 
-	public int getFrets() {
-		return frets;
-	}
+    public String getCreatedBy() {
+        return createdBy;
+    }
 
-	public void setFrets(int frets) {
-		this.frets = frets;
-	}
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
 
-	public String getWoodType() {
-		return woodType;
-	}
+    public Date getCreatedDate() {
+        return createdDate;
+    }
 
-	public void setWoodType(String woodType) {
-		this.woodType = woodType;
-	}
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
 
-	public Date getYearFirstMade() {
-		return yearFirstMade;
-	}
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
 
-	public void setYearFirstMade(Date yearFirstMade) {
-		this.yearFirstMade = yearFirstMade;
-	}
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
 
-	public Manufacturer getManufacturer() {
-		return manufacturer;
-	}
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
 
-	public void setManufacturer(Manufacturer manufacturer) {
-		this.manufacturer = manufacturer;
-	}
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
 
-	public ModelType getModelType() {
-		return modelType;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setModelType(ModelType modelType) {
-		this.modelType = modelType;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public int getFrets() {
+        return frets;
+    }
+
+    public void setFrets(int frets) {
+        this.frets = frets;
+    }
+
+    public String getWoodType() {
+        return woodType;
+    }
+
+    public void setWoodType(String woodType) {
+        this.woodType = woodType;
+    }
+
+    public Date getYearFirstMade() {
+        return yearFirstMade;
+    }
+
+    public void setYearFirstMade(Date yearFirstMade) {
+        this.yearFirstMade = yearFirstMade;
+    }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public ModelType getModelType() {
+        return modelType;
+    }
+
+    public void setModelType(ModelType modelType) {
+        this.modelType = modelType;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
